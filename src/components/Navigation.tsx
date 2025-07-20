@@ -2,14 +2,19 @@ import { useState } from "react";
 import { Menu, X, User, Search, BookOpen, Target, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const Navigation = () => {
+interface NavigationProps {
+  currentView: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources';
+  setCurrentView: (view: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources') => void;
+}
+
+const Navigation = ({ currentView, setCurrentView }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { icon: Target, label: "Assessment", href: "#assessment" },
-    { icon: Search, label: "Explore Careers", href: "#careers" },
-    { icon: BookOpen, label: "Resources", href: "#resources" },
-    { icon: BarChart, label: "Dashboard", href: "#dashboard" },
+    { icon: Target, label: "Assessment", view: "assessment" as const },
+    { icon: Search, label: "Explore Careers", view: "careers" as const },
+    { icon: BookOpen, label: "Resources", view: "resources" as const },
+    { icon: BarChart, label: "Dashboard", view: "dashboard" as const },
   ];
 
   return (
@@ -17,24 +22,31 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <button 
+            onClick={() => setCurrentView('home')}
+            className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+          >
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Target className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-xl text-foreground">SkillBlueprint</span>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.label}
-                href={item.href}
-                className="flex items-center space-x-2 text-foreground/70 hover:text-primary transition-colors duration-200"
+                onClick={() => setCurrentView(item.view)}
+                className={`flex items-center space-x-2 transition-colors duration-200 ${
+                  currentView === item.view 
+                    ? 'text-primary font-medium' 
+                    : 'text-foreground/70 hover:text-primary'
+                }`}
               >
                 <item.icon className="w-4 h-4" />
                 <span className="font-medium">{item.label}</span>
-              </a>
+              </button>
             ))}
           </div>
 
@@ -65,15 +77,21 @@ const Navigation = () => {
           <div className="md:hidden py-4 border-t border-white/20 animate-fade-in">
             <div className="space-y-4">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.label}
-                  href={item.href}
-                  className="flex items-center space-x-3 py-2 text-foreground/70 hover:text-primary transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setCurrentView(item.view);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`flex items-center space-x-3 py-2 w-full text-left transition-colors duration-200 ${
+                    currentView === item.view 
+                      ? 'text-primary font-medium' 
+                      : 'text-foreground/70 hover:text-primary'
+                  }`}
                 >
                   <item.icon className="w-5 h-5" />
                   <span className="font-medium">{item.label}</span>
-                </a>
+                </button>
               ))}
               <div className="pt-4 space-y-2">
                 <Button variant="outline" size="sm" className="w-full rounded-full">
