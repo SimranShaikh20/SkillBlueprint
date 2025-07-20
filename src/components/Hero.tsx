@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroImage from "@/assets/hero-career.jpg";
 
-const Hero = () => {
+interface HeroProps {
+  onGetStarted?: () => void;
+  onExploreCareers?: () => void;
+}
+
+const Hero = ({ onGetStarted, onExploreCareers }: HeroProps) => {
   const features = [
     {
       icon: Target,
@@ -51,14 +56,16 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
+                onClick={onGetStarted}
                 className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 rounded-full shadow-glow transition-all duration-300 hover:scale-105"
               >
-                Start Your Assessment
+                Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
+                onClick={onExploreCareers}
                 className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-full backdrop-blur-sm"
               >
                 Explore Careers

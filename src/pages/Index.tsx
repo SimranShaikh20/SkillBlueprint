@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import SkillsAssessment from "@/components/SkillsAssessment";
 import CareerDashboard from "@/components/CareerDashboard";
+import ProfileForm from "@/components/ProfileForm";
 
 const Index = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'assessment' | 'dashboard' | 'careers' | 'resources'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'assessment' | 'dashboard' | 'careers' | 'resources' | 'profile'>('home');
+  const [userProfile, setUserProfile] = useState<any>(null);
+
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      setUserProfile(JSON.parse(savedProfile));
+    }
+  }, []);
+
+  const handleProfileComplete = (profileData: any) => {
+    setUserProfile(profileData);
+    setCurrentView('dashboard');
+  };
 
   const renderView = () => {
     switch (currentView) {
@@ -24,7 +38,14 @@ const Index = () => {
           </div>
         );
       case 'dashboard':
-        return <CareerDashboard />;
+        return <CareerDashboard userProfile={userProfile} />;
+      case 'profile':
+        return (
+          <ProfileForm 
+            onSubmit={handleProfileComplete}
+            onBack={() => setCurrentView('home')}
+          />
+        );
       case 'careers':
         return (
           <div className="min-h-screen bg-background pt-20 pb-16">
@@ -75,7 +96,12 @@ const Index = () => {
           </div>
         );
       default:
-        return <Hero />;
+        return (
+          <Hero 
+            onGetStarted={() => setCurrentView('profile')}
+            onExploreCareers={() => setCurrentView('careers')}
+          />
+        );
     }
   };
 

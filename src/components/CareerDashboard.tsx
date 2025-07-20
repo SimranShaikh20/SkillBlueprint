@@ -3,14 +3,39 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
-const CareerDashboard = () => {
-  const userProfile = {
-    name: "Alex Johnson",
-    currentRole: "Junior Developer",
-    targetRole: "Senior Full-Stack Developer",
-    skillsCompleted: 12,
-    totalSkills: 18,
-    careerProgress: 67
+interface CareerDashboardProps {
+  userProfile?: any;
+}
+
+const CareerDashboard = ({ userProfile }: CareerDashboardProps) => {
+  if (!userProfile) {
+    return (
+      <div className="min-h-screen bg-background pt-20 pb-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Career Dashboard</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            Complete your profile to see personalized career insights and recommendations.
+          </p>
+          <Button className="bg-gradient-primary text-white border-0">
+            Complete Profile First
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Calculate metrics from user profile
+  const skillsCompleted = userProfile.technicalSkills?.length || 0;
+  const totalSkills = userProfile.technicalSkills?.length + (userProfile.interests?.length || 0);
+  const careerProgress = Math.min(100, Math.round((skillsCompleted / Math.max(totalSkills, 1)) * 100));
+
+  const displayProfile = {
+    name: userProfile.name || "User",
+    currentRole: userProfile.currentJobTitle || "Professional",
+    targetRole: userProfile.careerGoals ? userProfile.careerGoals.substring(0, 50) + "..." : "Career Growth",
+    skillsCompleted,
+    totalSkills: Math.max(totalSkills, 1),
+    careerProgress
   };
 
   const skillsGap = [
@@ -75,10 +100,10 @@ const CareerDashboard = () => {
         {/* Welcome Header */}
         <div className="space-y-2">
           <h1 className="text-4xl font-bold text-foreground">
-            Welcome back, {userProfile.name}
+            Welcome back, {displayProfile.name}
           </h1>
           <p className="text-xl text-muted-foreground">
-            Continue your journey from {userProfile.currentRole} to {userProfile.targetRole}
+            Continue your journey from {displayProfile.currentRole} to {displayProfile.targetRole}
           </p>
         </div>
 
@@ -91,7 +116,7 @@ const CareerDashboard = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Career Progress</p>
-                <p className="text-2xl font-bold text-foreground">{userProfile.careerProgress}%</p>
+                <p className="text-2xl font-bold text-foreground">{displayProfile.careerProgress}%</p>
               </div>
             </div>
           </Card>
@@ -103,7 +128,7 @@ const CareerDashboard = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Skills Mastered</p>
-                <p className="text-2xl font-bold text-foreground">{userProfile.skillsCompleted}/{userProfile.totalSkills}</p>
+                <p className="text-2xl font-bold text-foreground">{displayProfile.skillsCompleted}/{displayProfile.totalSkills}</p>
               </div>
             </div>
           </Card>

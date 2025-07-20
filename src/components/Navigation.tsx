@@ -3,8 +3,8 @@ import { Menu, X, User, Search, BookOpen, Target, BarChart } from "lucide-react"
 import { Button } from "@/components/ui/button";
 
 interface NavigationProps {
-  currentView: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources';
-  setCurrentView: (view: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources') => void;
+  currentView: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources' | 'profile';
+  setCurrentView: (view: 'home' | 'assessment' | 'dashboard' | 'careers' | 'resources' | 'profile') => void;
 }
 
 const Navigation = ({ currentView, setCurrentView }: NavigationProps) => {
@@ -52,11 +52,11 @@ const Navigation = ({ currentView, setCurrentView }: NavigationProps) => {
 
           {/* User Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm" className="rounded-full">
-              <User className="w-4 h-4 mr-2" />
-              Sign In
-            </Button>
-            <Button size="sm" className="rounded-full bg-gradient-primary border-0 text-white hover:opacity-90">
+            <Button 
+              onClick={() => setCurrentView('assessment')}
+              size="sm" 
+              className="rounded-full bg-gradient-primary border-0 text-white hover:opacity-90"
+            >
               Get Started
             </Button>
           </div>
@@ -94,11 +94,14 @@ const Navigation = ({ currentView, setCurrentView }: NavigationProps) => {
                 </button>
               ))}
               <div className="pt-4 space-y-2">
-                <Button variant="outline" size="sm" className="w-full rounded-full">
-                  <User className="w-4 h-4 mr-2" />
-                  Sign In
-                </Button>
-                <Button size="sm" className="w-full rounded-full bg-gradient-primary border-0 text-white">
+                <Button 
+                  onClick={() => {
+                    setCurrentView('assessment');
+                    setIsMenuOpen(false);
+                  }}
+                  size="sm" 
+                  className="w-full rounded-full bg-gradient-primary border-0 text-white"
+                >
                   Get Started
                 </Button>
               </div>
