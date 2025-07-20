@@ -9,7 +9,7 @@
 
 **A modern, AI-powered career dashboard and learning platform that helps users discover ideal career paths, track skill progress, and get personalized learning resources based on resume analysis.**
 
-[🎯 Live Demo](https://your-demo-link.com)
+[🎯 Live Demo](https://skill-blueprint.netlify.app/)
 </div>
 
 ---
