@@ -2,41 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Career Platform Design System - Modern, Professional, Data-Driven */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors - Purple to Blue Career Theme */
+    --background: 220 15% 97%;
+    --foreground: 224 71.4% 4.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 224 71.4% 4.1%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary Brand - Deep Purple for Career Focus */
+    --primary: 263 70% 50%;
+    --primary-foreground: 210 20% 98%;
+    --primary-hover: 263 70% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Complementary Blue for Tech/Skills */
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Success - Growth Green */
+    --success: 142 76% 36%;
+    --success-foreground: 355.7 100% 97.3%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warning - Learning Orange */
+    --warning: 32 95% 44%;
+    --warning-foreground: 355.7 100% 97.3%;
+
+    /* Muted - Subtle Backgrounds */
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    /* Accent - Highlight Color */
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 263 70% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Career Platform Specific Colors */
+    --career-tech: 217 91% 60%;
+    --career-business: 32 95% 44%;
+    --career-creative: 291 84% 61%;
+    --career-healthcare: 142 76% 36%;
+    
+    /* Gradients for Modern Appeal */
+    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%) 0%, hsl(217 91% 60%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(220 14.3% 95.9%) 0%, hsl(210 20% 98%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 50%) 0%, hsl(217 91% 60%) 50%, hsl(142 76% 36%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -1px hsl(220 43% 11% / 0.1);
+    --shadow-medium: 0 4px 16px -4px hsl(220 43% 11% / 0.15);
+    --shadow-strong: 0 8px 32px -8px hsl(220 43% 11% / 0.2);
+    --shadow-glow: 0 0 40px hsl(263 70% 50% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
